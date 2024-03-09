@@ -76,6 +76,8 @@ To test the LSTM model API using Postman:
 7. Test various scenarios, including edge cases and error handling, to ensure robustness.
 8. Monitor API performance and track test results using Postman's collection runner and monitoring tools.
 
+<img width="968" alt="image" src="https://github.com/LiandarJoshua/Stock-App/assets/160778757/fc32bb89-6821-44d8-bc5c-201d3463f17b">
+
 
 
 Add a header for content-type and put the value as application/json
