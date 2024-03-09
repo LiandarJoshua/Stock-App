@@ -51,7 +51,7 @@ This is the predicted vs actual price vs the amazon stock price.
 
 <img width="740" alt="image" src="https://github.com/LiandarJoshua/Stock-App/assets/160778757/6998dd99-08a5-452f-9b49-0b2bb939987a">
 
-Mean Absolute Accuracy:3.6%
+Mean Absolute Error:3.6%
 
 r2 score:0.9774996390278032
 
