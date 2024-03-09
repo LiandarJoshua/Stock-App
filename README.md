@@ -76,8 +76,6 @@ To test the LSTM model API using Postman:
 7. Test various scenarios, including edge cases and error handling, to ensure robustness.
 8. Monitor API performance and track test results using Postman's collection runner and monitoring tools.
 
-<img width="968" alt="image" src="https://github.com/LiandarJoshua/Stock-App/assets/160778757/fc32bb89-6821-44d8-bc5c-201d3463f17b">
-
 
 
 Add a header for content-type and put the value as application/json
@@ -134,7 +132,7 @@ On Posting:
     "ticker": "AAPL"
 }
 
-
+<img width="968" alt="image" src="https://github.com/LiandarJoshua/Stock-App/assets/160778757/fc32bb89-6821-44d8-bc5c-201d3463f17b">
 ## Deployment On Amazon EC2
 
 1. **Create an EC2 Instance**: Launch a new EC2 instance on AWS. Choose an appropriate instance type and configure security groups to allow inbound traffic on port 5000 (or any other port you choose for the API).
@@ -154,6 +152,11 @@ On Posting:
 8. **Test the API**: Once the application is running, test the API endpoints to ensure they are working correctly. You can use tools like Postman or cURL to send requests to the API.
 
 9. **Monitor and Maintain**: Monitor the performance of your application and EC2 instance. Set up logging and monitoring tools to track API usage, errors, and other metrics. Perform regular maintenance tasks such as security updates and backups.
+
+Finally the webserver is implemented and takes input from the user to give the closing price as output.
+
+<img width="1264" alt="image" src="https://github.com/LiandarJoshua/Stock-App/assets/160778757/0104558d-9351-41e2-a858-6879e0c04dad">
+
 ## Contributing
 
 Contributions are welcome! Feel free to open an issue or submit a pull request with any improvements or additional features you'd like to see.
