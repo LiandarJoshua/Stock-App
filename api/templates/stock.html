@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Closing Price Predictor</title>
+    <style>
+        body {
+            background-color: bisque;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        form {
+            text-align: center;
+        }
+        /* Additional style for the result box */
+        #result-box {
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        /* Style for the graph container */
+        #graph-container {
+            margin-top: 20px;
+        }
+    </style>
+
+    <!-- Include Plotly library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1 style="text-align:center;background-color:black;color:white;">Stock Closing Price Predictor</h1>
+    <p style="text-align:center">Enter the ticker for your required stock as per Yahoo Finance to receive tomorrow's predicted closing price</p>
+    <form id="predictor" onsubmit="predict(event)">
+        <label for="ticker">Enter ticker:</label>
+        <input type="text" id="ticker" name="ticker" required><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    <!-- Div to display the predicted value -->
+    <div id="result-box"></div>
+
+    <!-- Div to display the graph -->
+    <div id="graph-container">
+        <h2 style="text-align: center;">Past 30 Days Closing Prices</h2>
+        <div id="graph"></div>
+    </div>
+
+    <script>
+        function predict(event) {
+            event.preventDefault();  // Prevent form submission
+
+            // Get the ticker input value
+            var ticker = document.getElementById("ticker").value;
+
+            // Prepare the request data
+            var data = JSON.stringify({"ticker": ticker});
+
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // Configure the request
+            xhr.open("POST", "/predict", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            // Define the request callback
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        displayPrediction(response);
+                        displayGraph(response);
+                    } else {
+                        displayError("Error: " + xhr.status);
+                    }
+                }
+            };
+
+            // Send the request
+            xhr.send(data);
+        }
+
+        function displayPrediction(response) {
+            var resultDiv = document.getElementById("result-box");
+            resultDiv.innerHTML = "Tomorrow's predicted closing price for " + response.ticker + " is: " + response.predictions[0][0];
+        }
+
+        function displayError(message) {
+            var resultDiv = document.getElementById("result-box");
+            resultDiv.innerHTML = message;
+        }
+
+        function displayGraph(response) {
+            var closing_prices = response.closing_prices;
+
+            var trace = {
+                x: Array.from({ length: closing_prices.length }, (_, i) => i + 1),
+                y: closing_prices,
+                type: 'scatter',
+                mode: 'lines+markers',
+                marker: { color: 'blue' }
+            };
+
+            var layout = {
+                title: 'Past 30 Days Stock Closing Prices',
+                xaxis: { title: 'Day' },
+                yaxis: { title: 'Closing Price (USD)' }
+            };
+
+            var data = [trace];
+
+            Plotly.newPlot('graph', data, layout);
+        }
+    </script>
+</body>
+</html>
