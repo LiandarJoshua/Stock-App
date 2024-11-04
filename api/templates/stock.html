@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Closing Price Predictor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,7 +131,7 @@
 
         function displayPrediction(response) {
             var resultDiv = document.getElementById("result-box");
-            resultDiv.innerHTML = "Tomorrow's predicted closing price for " + response.ticker + " is: " + response.predictions[0][0];
+            resultDiv.innerHTML = "Tomorrow's predicted closing price for " + response.ticker + " is: $" + response.predictions[0][0].toFixed(2);
         }
 
         function displayError(message) {
@@ -158,6 +159,7 @@
             var data = [trace];
 
             Plotly.newPlot('graph', data, layout);
+        }
     </script>
 </body>
 </html>
